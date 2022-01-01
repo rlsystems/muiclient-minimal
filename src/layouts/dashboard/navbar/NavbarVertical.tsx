@@ -1,22 +1,37 @@
 import { useLocation } from 'react-router-dom';
 // @mui
-import { Box, Stack, Drawer } from '@mui/material';
+import { Box, Stack, Drawer, List } from '@mui/material';
 
 // config
 import { NAVBAR } from '../../../config';
 // components
 import Logo from '../../../components/Logo';
 import Scrollbar from '../../../components/Scrollbar';
-import { NavSectionVertical } from '../../../components/nav-section';
 //
-import navConfig from './NavConfig';
 import NavbarAccount from './NavbarAccount';
 
 // ----------------------------------------------------------------------
 
+// components
+import SvgIconStyle from '../../../components/SvgIconStyle';
 
+import { NavItem } from 'src/components/nav-section/vertical/NavItem';
+import { ReactElement } from 'react';
 
 // ----------------------------------------------------------------------
+
+
+interface NavListProps {
+  title: string;
+  path: string;
+  icon?: ReactElement;
+  
+};
+
+
+const itemOne: NavListProps = { title: 'One', path: '/dashboard/one', icon: <SvgIconStyle src={`/icons/ic_user.svg`} sx={{ width: 1, height: 1 }} /> }
+const itemTwo: NavListProps = { title: 'Two', path: '/dashboard/two', icon: <SvgIconStyle src={`/icons/ic_ecommerce.svg`} sx={{ width: 1, height: 1 }} /> }
+const itemThree: NavListProps = { title: 'Three', path: '/dashboard/three', icon: <SvgIconStyle src={`/icons/ic_analytics.svg`} sx={{ width: 1, height: 1 }} /> }
 
 
 
@@ -42,10 +57,19 @@ export default function NavbarVertical() {
         }}
       >
 
-          <Logo />
+        <Logo />
       </Stack>
 
-      <NavSectionVertical navConfig={navConfig} />
+      <Box >
+        <List key={1} disablePadding sx={{ px: 2 }}>
+          <NavItem item={itemOne} />
+          <NavItem item={itemTwo} />
+          <NavItem item={itemThree} />
+        </List>
+
+      </Box>
+
+
 
       <Box sx={{ flexGrow: 1 }} />
 
