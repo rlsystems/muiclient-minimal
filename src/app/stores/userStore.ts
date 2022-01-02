@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { User, UserLogin } from "../models/user";
 import { store } from "./store";
-//import { history } from '../..';
+import { history } from '../..';
 
 export default class UserStore {
 
@@ -32,7 +32,7 @@ export default class UserStore {
             runInAction(() => //timing issue with async operations
                 this.currentUser = user.data
             );
-            //history.push('/dashboard');
+            history.push('/dashboard/one');
             //navigate("/dashboard", { replace: true });
             store.modalStore.closeModal();
         } catch (error) {

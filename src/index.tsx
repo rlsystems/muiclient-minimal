@@ -7,23 +7,27 @@ import 'react-lazy-load-image-component/src/effects/opacity.css';
 import 'react-lazy-load-image-component/src/effects/black-and-white.css';
 
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 // contexts
 import { SettingsProvider } from './contexts/SettingsContext';
 
 
 //
-import App from './App';
+import App from './app/layout/App';
+
+import {createBrowserHistory} from 'history';
+export const history = createBrowserHistory();
+
 
 // ----------------------------------------------------------------------
 
 ReactDOM.render(
   <HelmetProvider>
     <SettingsProvider>
-      <BrowserRouter>
+      <Router history={history}>
         <App />
-      </BrowserRouter>
+      </Router>
     </SettingsProvider>
 
   </HelmetProvider>,
