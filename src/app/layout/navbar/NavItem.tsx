@@ -2,7 +2,7 @@ import { NavLink as RouterLink } from 'react-router-dom';
 import { useLocation  } from 'react-router-dom';
 
 // type
-import { NavItemProps } from '../type';
+import { NavItemProps } from './type';
 //
 import { ListItemStyle, ListItemIconStyle } from './style';
 

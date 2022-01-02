@@ -12,21 +12,14 @@ import { useStore } from '../stores/store';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import NavbarVertical from './navbar/NavbarVertical';
-import LoginPage from '../../pages/LoginPage';
+import LoginPage from '../../features/login/LoginPage';
 
 import LoadingScreen from 'src/components/LoadingScreen';
+import HomePage from 'src/features/home/HomePage';
 
 // ----------------------------------------------------------------------
-const Loadable = (Component: ElementType) => (props: any) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const { pathname } = useLocation();
 
-  return (
-    <Suspense fallback={<LoadingScreen isDashboard={pathname.includes('/dashboard')} />}>
-      <Component {...props} />
-    </Suspense>
-  );
-};
+
 function App() {
   const location = useLocation(); //returns location object from router, useful for the key
 
@@ -43,8 +36,6 @@ function App() {
   }, [commonStore, userStore])
 
 
-
-
   return (
     <ThemeProvider>
       <ThemeColorPresets>
@@ -57,28 +48,27 @@ function App() {
         {/* Full Pages */}
         <Switch>
           <Route exact path='/login' component={LoginPage} />
-
+          <Route exact path='/' component={HomePage} />
           {/* Pages with Side Navigation Bar */}
           <Route
             path={'/(.+)'}
             render={() => (
 
-              <Box sx={{ display: 'flex' }}>
+              <Box>
                 <NavbarVertical />
 
                 <Switch>
+                  <Route exact path='/brands' component={BrandDashboard} />
+                  <Route exact key={location.key} path={['/createBrand', '/editBrand/:id']} component={BrandForm} />
 
-                  <Route exact  path='/dashboard/one' component={PageOne} />
-                  <Route exact  path='/dashboard/two' component={PageTwo} />
-                  <Route exact  path='/dashboard/three' component={PageThree} />
+                  <Route exact path='/dashboard/one' component={PageOne} />
+                  <Route exact path='/dashboard/two' component={PageTwo} />
+                  <Route exact path='/dashboard/three' component={PageThree} />
 
 
                   <Route component={NotFound} />
                 </Switch>
               </Box>
-
-
-
             )} />
         </Switch>
 
@@ -88,6 +78,19 @@ function App() {
 }
 
 export default observer(App);
+
+
+
+const Loadable = (Component: ElementType) => (props: any) => {
+
+  return (
+    <Suspense fallback={<LoadingScreen isDashboard={true} />}>
+      <Component {...props} />
+    </Suspense>
+  );
+};
+const BrandDashboard = Loadable(lazy(() => import('../../features/brands/dashboard/BrandDashboard')));
+const BrandForm = Loadable(lazy(() => import('../../features/brands/form/BrandForm')));
 
 
 const PageOne = Loadable(lazy(() => import('../../pages/PageOne')));

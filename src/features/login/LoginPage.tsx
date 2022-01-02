@@ -11,7 +11,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { observer } from 'mobx-react-lite';
-import { useStore } from '../app/stores/store';
+import { useStore } from '../../app/stores/store';
 import * as yup from 'yup';
 import { LoadingButton } from '@mui/lab';
 import { Link } from 'react-router-dom';
