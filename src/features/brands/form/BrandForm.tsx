@@ -10,6 +10,7 @@ import * as Yup from 'yup';
 import { Brand } from '../../../app/models/brand';
 import { Box, Button, Container, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import Page from 'src/components/Page';
 
 
 
@@ -57,25 +58,14 @@ export default observer(function BrandForm() {
 
 
 
-   // if (loadingInitial) return <LoadingComponent content='Loading brand...' />
+    // if (loadingInitial) return <LoadingComponent content='Loading brand...' />
 
     return (
-        <Box
-            component="main"
-            sx={{
-                backgroundColor: (theme) =>
-                    theme.palette.mode === 'light'
-                        ? theme.palette.grey[100]
-                        : theme.palette.grey[900],
-                flexGrow: 1,
-                height: '100vh',
-                overflow: 'auto',
-            }}
-        >
-            <Container maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+        <Page title="Page One">
+            <Container maxWidth={false}>
 
                 <Typography variant="h4" gutterBottom>
-                    {(id) ? 'Edit Brand' : 'Create Brand'}            
+                    {(id) ? 'Edit Brand' : 'Create Brand'}
                 </Typography>
 
 
@@ -126,7 +116,7 @@ export default observer(function BrandForm() {
 
 
             </Container>
-        </Box>
+        </Page>
     )
 })
 

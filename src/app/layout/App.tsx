@@ -49,6 +49,7 @@ function App() {
         <Switch>
           <Route exact path='/login' component={LoginPage} />
           <Route exact path='/' component={HomePage} />
+          
           {/* Pages with Side Navigation Bar */}
           <Route
             path={'/(.+)'}
@@ -60,6 +61,10 @@ function App() {
                 <Switch>
                   <Route exact path='/brands' component={BrandDashboard} />
                   <Route exact key={location.key} path={['/createBrand', '/editBrand/:id']} component={BrandForm} />
+
+                  <Route exact path='/users' component={UserDashboard} />
+                  <Route exact path='/createUser' component={UserRegistration} />
+                  <Route exact key={location.key} path={['/editUser', '/editUser/:id']} component={UserProfile} />
 
                   <Route exact path='/dashboard/one' component={PageOne} />
                   <Route exact path='/dashboard/two' component={PageTwo} />
@@ -91,6 +96,10 @@ const Loadable = (Component: ElementType) => (props: any) => {
 };
 const BrandDashboard = Loadable(lazy(() => import('../../features/brands/dashboard/BrandDashboard')));
 const BrandForm = Loadable(lazy(() => import('../../features/brands/form/BrandForm')));
+
+const UserDashboard = Loadable(lazy(() => import('../../features/users/dashboard/UserDashboard')));
+const UserRegistration = Loadable(lazy(() => import('../../features/users/form/UserRegistration')));
+const UserProfile = Loadable(lazy(() => import('../../features/users/form/UserProfile')));
 
 
 const PageOne = Loadable(lazy(() => import('../../pages/PageOne')));

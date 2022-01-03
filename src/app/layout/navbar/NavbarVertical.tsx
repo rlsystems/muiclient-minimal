@@ -29,8 +29,8 @@ interface NavListProps {
 };
 
 
-const itemOne: NavListProps = { title: 'One', path: '/dashboard/one', icon: <SvgIconStyle src={`/icons/ic_user.svg`} sx={{ width: 1, height: 1 }} /> }
-const itemTwo: NavListProps = { title: 'brands', path: '/brands', icon: <SvgIconStyle src={`/icons/ic_ecommerce.svg`} sx={{ width: 1, height: 1 }} /> }
+const itemOne: NavListProps = { title: 'Users', path: '/users', icon: <SvgIconStyle src={`/icons/ic_user.svg`} sx={{ width: 1, height: 1 }} /> }
+const itemTwo: NavListProps = { title: 'Brands', path: '/brands', icon: <SvgIconStyle src={`/icons/ic_ecommerce.svg`} sx={{ width: 1, height: 1 }} /> }
 const itemThree: NavListProps = { title: 'Three', path: '/dashboard/three', icon: <SvgIconStyle src={`/icons/ic_analytics.svg`} sx={{ width: 1, height: 1 }} /> }
 
 

@@ -19,19 +19,19 @@ import {
     TablePagination,
     TableHead,
     TableSortLabel,
+    Chip,
 } from '@mui/material';
 
 import Scrollbar from '../../../components/Scrollbar';
 import SearchNotFound from '../../../components/SearchNotFound';
 // sections
 import { useStore } from 'src/app/stores/store';
-import BrandListToolbar from './BrandListToolbar';
-import RowOptionsMenu from './RowOptionsMenu';
+import UserListToolbar from './UserListToolbar';
 
 // ----------------------------------------------------------------------
 
 interface Column {
-    id: 'name' | 'description' | 'id';
+    id: 'first' | 'last' | 'email' | 'username' | 'active' | 'guid';
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -39,22 +39,20 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-    { id: 'name', label: 'Name', minWidth: 170 },
-    { id: 'description', label: 'Desc', minWidth: 100 },
-    {
-        id: 'id',
-        label: 'GUID',
-        minWidth: 170,
-       
-    }
+    { id: 'first', label: 'First' },
+    { id: 'last', label: 'Last' },
+    { id: 'email', label: 'Email' },
+    { id: 'username', label: 'Username' },
+    { id: 'active', label: 'Active' },
+    { id: 'guid', label: 'GUID' },
 ];
 
 // ----------------------------------------------------------------------
 
-export default function BrandListTable() {
+export default function UserListTable() {
 
-    const { brandStore } = useStore();
-    const { brandsSorted } = brandStore;
+    const { appUserStore } = useStore();
+    const { appUsersSorted } = appUserStore;
 
 
     const [page, setPage] = React.useState(0);
@@ -74,7 +72,7 @@ export default function BrandListTable() {
     return (
         <Card>
 
-            <BrandListToolbar />
+            <UserListToolbar />
             <Scrollbar>
                 <TableContainer sx={{ minWidth: 800 }}>
                     <Table>
@@ -92,40 +90,31 @@ export default function BrandListTable() {
                                         </TableSortLabel>
                                     </TableCell>
                                 ))}
-                                <TableCell/>
+                                <TableCell />
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {brandsSorted
+                            {appUsersSorted
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map((row) => {
+                                .map((user) => {
                                     return (
-                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                                            {columns.map((column) => {
-                                                const value = row[column.id];
-                                                return (
-                                                    <TableCell key={column.id} align={column.align}>
-                                                        {column.format && typeof value === 'number'
-                                                            ? column.format(value)
-                                                            : value}
-                                                    </TableCell>
-                                                );
-                                            })}
-                                            <TableCell sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                                <RowOptionsMenu brandId={row.id}/>
-                                                {/* <Button
-                                                    variant="text"
-                                                    color="error"
-                                                    onClick={() => brandStore.deleteBrand(row.id)}
-                                                    sx={{ mr: 1 }}
-                                                >
-                                                    Delete
-                                                </Button>
-                                                <Button component={Link} to={`/editBrand/${row.id}`} variant="text" >
-                                                    Edit
-                                                </Button> */}
-                                            </TableCell>
-                                        </TableRow>
+                                        <TableRow key={user.id}>
+                                        <TableCell>{user.firstName}</TableCell>
+                                        <TableCell>{user.lastName}</TableCell>
+                                        <TableCell>{user.email}</TableCell>
+                                        <TableCell>{user.userName}</TableCell>
+                                        <TableCell>{user.isActive ?
+                                            <Chip label="True" variant="outlined" color="success" sx={{width: '4rem'}} /> :
+                                            <Chip label="False" variant="outlined" color="error"  sx={{width: '4rem'}}/>}
+                                        </TableCell>
+                                        <TableCell>{user.id}</TableCell>
+                                        <TableCell sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        
+                                            <Button component={Link} to={`/editUser/${user.id}`} variant="text" >
+                                                Edit
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
                                     );
                                 })}
                         </TableBody>
@@ -136,7 +125,7 @@ export default function BrandListTable() {
             <TablePagination
                 rowsPerPageOptions={[5]}
                 component="div"
-                count={brandsSorted.length}
+                count={appUsersSorted.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}

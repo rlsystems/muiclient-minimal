@@ -4,9 +4,8 @@ import React, { useEffect } from 'react';
 import { useStore } from '../../../app/stores/store';
 import Box from '@mui/material/Box';
 
-import BrandListTable from './BrandListTable';
+import UserListTable from './UserListTable';
 import { Button, Container } from '@mui/material';
-import BrandHeader from './BrandHeader';
 import Page from '../../../components/Page';
 import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 import Iconify from '../../../components/Iconify';
@@ -15,28 +14,29 @@ import { Link } from 'react-router-dom';
 
 
 
-export default observer(function BrandDashboard() {
+export default observer(function UserDashboard() {
 
 
-    const { brandStore } = useStore();
-    const { loadBrands, brandRegistry } = brandStore;
+    const { appUserStore } = useStore();
+    const { loadAppUsers, appUserRegistry } = appUserStore;
+
 
     useEffect(() => {
-        if (brandRegistry.size <= 1) loadBrands();
-    }, [brandRegistry.size, loadBrands])
+        if (appUserRegistry.size <= 1) loadAppUsers();
+    }, [appUserRegistry.size, loadAppUsers])
 
 
-    //if (brandStore.loadingInitial) return <LoadingComponent content='Loading Brands...' />
+   // if (appUserStore.loadingInitial) return <LoadingComponent content='Loading Users...' />
 
     return (
 
 
 
-        <Page title="Page One">
+        <Page title="Users">
             <Container maxWidth={false}>
 
                 <HeaderBreadcrumbs
-                    heading="Brand List"
+                    heading="User List"
                     links={[
                         { name: 'Dashboard', href: '' },
                         { name: 'User', href: '' },
@@ -46,17 +46,17 @@ export default observer(function BrandDashboard() {
                         <Button
                             variant="contained"
                             component={Link}
-                            to={'/createBrand'}
+                            to={'/createUser'}
                             startIcon={<Iconify icon={'eva:plus-fill'} />}
                         >
-                            New Brand
+                            New User
                         </Button>
                     }
                 />
 
 
                
-                <BrandListTable />
+                <UserListTable />
             </Container>
         </Page>
 
