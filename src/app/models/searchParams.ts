@@ -1,5 +1,5 @@
 export interface SearchParams {
-    keyword: string;
+    //keyword: string;
     pageNumber: number;
     pageSize: number;
 

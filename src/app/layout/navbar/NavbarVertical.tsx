@@ -17,6 +17,7 @@ import SvgIconStyle from '../../../components/SvgIconStyle';
 
 import { NavItem } from 'src/app/layout/navbar/NavItem';
 import { ReactElement } from 'react';
+import AccountPopover from './AccountPopover';
 
 // ----------------------------------------------------------------------
 
@@ -28,17 +29,13 @@ interface NavListProps {
   
 };
 
-
-const itemOne: NavListProps = { title: 'Users', path: '/users', icon: <SvgIconStyle src={`/icons/ic_user.svg`} sx={{ width: 1, height: 1 }} /> }
-const itemTwo: NavListProps = { title: 'Brands', path: '/brands', icon: <SvgIconStyle src={`/icons/ic_ecommerce.svg`} sx={{ width: 1, height: 1 }} /> }
-const itemThree: NavListProps = { title: 'Three', path: '/dashboard/three', icon: <SvgIconStyle src={`/icons/ic_analytics.svg`} sx={{ width: 1, height: 1 }} /> }
+const itemOne: NavListProps = { title: 'Venues', path: '/venues', icon: <SvgIconStyle src={`/icons/ic_ecommerce.svg`} sx={{ width: 1, height: 1 }} /> }
+const itemTwo: NavListProps = { title: 'Users', path: '/users', icon: <SvgIconStyle src={`/icons/ic_user.svg`} sx={{ width: 1, height: 1 }} /> }
+const itemThree: NavListProps = { title: 'Tenants', path: '/tenants', icon: <SvgIconStyle src={`/icons/ic_analytics.svg`} sx={{ width: 1, height: 1 }} /> }
 
 
 
 export default function NavbarVertical() {
-
-
-
 
   const renderContent = (
     <Scrollbar
@@ -73,7 +70,7 @@ export default function NavbarVertical() {
 
       <Box sx={{ flexGrow: 1 }} />
 
-      <NavbarAccount />
+      <AccountPopover />
 
     </Scrollbar>
   );
@@ -85,7 +82,7 @@ export default function NavbarVertical() {
       PaperProps={{
         sx: {
           width: NAVBAR.DASHBOARD_COLLAPSE_WIDTH,
-          borderRightStyle: 'dashed',
+          borderRightStyle: 'solid',
           bgcolor: 'background.default',
         },
       }}

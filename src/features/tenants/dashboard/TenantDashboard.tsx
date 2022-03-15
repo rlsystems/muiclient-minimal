@@ -4,9 +4,8 @@ import React, { useEffect } from 'react';
 import { useStore } from '../../../app/stores/store';
 import Box from '@mui/material/Box';
 
-import BrandListTable from './BrandListTable';
+import TenantListTable from './TenantListTable';
 import { Button, Container } from '@mui/material';
-import BrandHeader from './BrandHeader';
 import Page from '../../../components/Page';
 import HeaderBreadcrumbs from '../../../components/HeaderBreadcrumbs';
 import Iconify from '../../../components/Iconify';
@@ -15,28 +14,27 @@ import { Link } from 'react-router-dom';
 
 
 
-export default observer(function BrandDashboard() {
+export default observer(function TenantDashboard() {
 
 
-    const { brandStore } = useStore();
-    const { loadBrands, brandRegistry } = brandStore;
+    const { tenantStore } = useStore();
+    const {loadTenants, tenantRegistry} = tenantStore;
 
     useEffect(() => {
-        if (brandRegistry.size <= 1) loadBrands();
-    }, [brandRegistry.size, loadBrands])
+        if(tenantRegistry.size < 1) loadTenants();
+      }, [tenantRegistry.size, loadTenants])
 
 
-    //if (brandStore.loadingInitial) return <LoadingComponent content='Loading Brands...' />
 
     return (
 
 
 
-        <Page title="Page One">
+        <Page title="Tenant List">
             <Container maxWidth={false}>
 
                 <HeaderBreadcrumbs
-                    heading="Brand List"
+                    heading="Tenant List"
                     links={[
                         { name: 'Dashboard', href: '' },
                         { name: 'User', href: '' },
@@ -46,17 +44,17 @@ export default observer(function BrandDashboard() {
                         <Button
                             variant="contained"
                             component={Link}
-                            to={'/createBrand'}
+                            to={'/createTenant'}
                             startIcon={<Iconify icon={'eva:plus-fill'} />}
                         >
-                            New Brand
+                            New Tenant
                         </Button>
                     }
                 />
 
 
                
-                <BrandListTable />
+                <TenantListTable />
             </Container>
         </Page>
 

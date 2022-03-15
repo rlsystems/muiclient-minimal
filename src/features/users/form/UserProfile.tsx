@@ -29,6 +29,7 @@ export default observer(function UserProfile() {
         email: '',
         phoneNumber: '',
         isActive: true,
+        roleId: 'basic'
     });
 
     //gets passed to formik
@@ -154,6 +155,18 @@ export default observer(function UserProfile() {
                             onBlur={formik.handleBlur}
                             error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
                             helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+                        />
+                          <TextField
+                            fullWidth
+                            margin="normal"
+                            id="roleId"
+                            name="roleId"
+                            label="Role Id"
+                            value={formik.values.roleId}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.roleId && Boolean(formik.errors.roleId)}
+                            helperText={formik.touched.roleId && formik.errors.roleId}
                         />
 
 

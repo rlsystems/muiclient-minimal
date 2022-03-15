@@ -6,19 +6,18 @@ export interface User {
     email: string;
     phoneNumber: string;
     isActive: boolean;
-    imageUrl?: string;
+    roleId: string;
 }
 
 export interface RegisterUserFormValues {
     id: string;
     firstName: string;
     lastName: string;
-    userName: string;
     email: string;
     password: string;
     confirmPassword: string;
     phoneNumber: string;
-    
+    roleId: string;   
 }
 
 

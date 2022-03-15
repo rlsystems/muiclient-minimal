@@ -5,7 +5,7 @@ import 'simplebar/src/simplebar.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import 'react-lazy-load-image-component/src/effects/opacity.css';
 import 'react-lazy-load-image-component/src/effects/black-and-white.css';
-
+import 'material-react-toastify/dist/ReactToastify.css';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';

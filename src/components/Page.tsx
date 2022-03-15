@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { forwardRef, ReactNode } from 'react';
 // @mui
 import { Box, BoxProps } from '@mui/material';
-
+// config
 // ----------------------------------------------------------------------
 
 interface Props extends BoxProps {
@@ -18,7 +18,7 @@ const Page = forwardRef<HTMLDivElement, Props>(({ children, title = '', meta, ..
       {meta}
     </Helmet>
 
-    <Box ref={ref} {...other} sx={{pl: '90px', py: '24px'}}>
+    <Box ref={ref} {...other} sx={{pl: '88px', py: '24px', height: '100%'}}>
       {children}
     </Box>
   </>

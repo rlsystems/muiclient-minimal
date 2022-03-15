@@ -1,33 +1,22 @@
-
-import { Link, Link as RouterLink } from 'react-router-dom';
-
 import * as React from 'react';
-
 
 // @mui
 import {
-    Card,
     Table,
-
-    Button,
-
     TableRow,
     TableBody,
     TableCell,
-
     TableContainer,
     TablePagination,
     TableHead,
     TableSortLabel,
+    
 } from '@mui/material';
 
-import Scrollbar from '../../../components/Scrollbar';
-import SearchNotFound from '../../../components/SearchNotFound';
 // sections
 import { useStore } from 'src/app/stores/store';
-import BrandListToolbar from './BrandListToolbar';
+import VenueListToolbar from './VenueListToolbar';
 import RowOptionsMenu from './RowOptionsMenu';
-
 // ----------------------------------------------------------------------
 
 interface Column {
@@ -45,20 +34,20 @@ const columns: readonly Column[] = [
         id: 'id',
         label: 'GUID',
         minWidth: 170,
-       
+
     }
 ];
 
 // ----------------------------------------------------------------------
 
-export default function BrandListTable() {
+export default function VenueListTable() {
 
-    const { brandStore } = useStore();
-    const { brandsSorted } = brandStore;
+    const { venueStore } = useStore();
+    const { venuesSorted } = venueStore;
 
 
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(20);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -70,33 +59,34 @@ export default function BrandListTable() {
     };
 
 
-
     return (
-        <Card>
+        <div>
 
-            <BrandListToolbar />
-            <Scrollbar>
-                <TableContainer sx={{ minWidth: 800 }}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                {columns.map((column) => (
-                                    <TableCell
-                                        key={column.id}
+            <VenueListToolbar />
+
+            <TableContainer sx={{ minWidth: 800, height: 'calc(100vh - 19rem)' }}>
+                <Table stickyHeader aria-label="sticky table">
+                    <TableHead >
+                        <TableRow>
+                            {columns.map((column) => (
+                                <TableCell
+                                    key={column.id}
+                                    sx={{'&:first-of-type' : { borderTopLeftRadius: 0, borderBottomLeftRadius: 0, boxShadow: 'none'}, bgcolor: 'background.default'}}
+                                >
+                                    <TableSortLabel
+                                        hideSortIcon
                                     >
-                                        <TableSortLabel
-                                            hideSortIcon
-                                        >
-                                            {column.label}
+                                        {column.label}
 
-                                        </TableSortLabel>
-                                    </TableCell>
-                                ))}
-                                <TableCell/>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {brandsSorted
+                                    </TableSortLabel>
+                                </TableCell>
+                            ))}
+                            <TableCell sx={{'&:last-of-type' : { borderTopRightRadius: 0, borderBottomRightRadius: 0, boxShadow: 'none'}, bgcolor: 'background.default'}} />
+                        </TableRow>
+                    </TableHead>
+          
+                        <TableBody sx={{  width: '100%' }}>
+                            {venuesSorted
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row) => {
                                     return (
@@ -112,37 +102,27 @@ export default function BrandListTable() {
                                                 );
                                             })}
                                             <TableCell sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                                <RowOptionsMenu brandId={row.id}/>
-                                                {/* <Button
-                                                    variant="text"
-                                                    color="error"
-                                                    onClick={() => brandStore.deleteBrand(row.id)}
-                                                    sx={{ mr: 1 }}
-                                                >
-                                                    Delete
-                                                </Button>
-                                                <Button component={Link} to={`/editBrand/${row.id}`} variant="text" >
-                                                    Edit
-                                                </Button> */}
+                                                <RowOptionsMenu venueId={row.id} />
+                  
                                             </TableCell>
                                         </TableRow>
                                     );
                                 })}
                         </TableBody>
-                    </Table>
-                </TableContainer>
-            </Scrollbar>
+           
+                </Table>
+            </TableContainer>
 
             <TablePagination
-                rowsPerPageOptions={[5]}
+                rowsPerPageOptions={[20]}
                 component="div"
-                count={brandsSorted.length}
+                count={venuesSorted.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
             />
-        </Card>
+        </div>
     );
 }
 

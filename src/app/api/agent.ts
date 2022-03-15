@@ -1,14 +1,15 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { toast } from 'react-toastify';
+import { toast } from 'material-react-toastify';
 //import { history } from '../..';
-import { Brand } from '../models/brand';
 
 import { store } from '../stores/store';
 import { TokenData, User, UserLogin, RegisterUserFormValues } from '../models/user';
 import { SearchParams } from '../models/searchParams';
 import { PaginatedResult } from '../models/paginatedResult';
 import { Result } from '../models/result';
-import { RegisterTenantFormValues, Tenant } from '../models/tenant';
+import { CreateTenantRequest, Tenant } from '../models/tenant';
+import { Property } from '../models/property';
+import { Venue } from '../models/venue';
 
 
 const sleep = (delay: number) => {
@@ -17,7 +18,7 @@ const sleep = (delay: number) => {
     })
 }
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = 'https://localhost:7250/api';
 
 axios.interceptors.request.use(config => { //this will send up the token with every request, when there is a token
     const token = store.commonStore.token;
@@ -31,7 +32,7 @@ axios.interceptors.request.use(config => { //this will send up the token with ev
 })
 
 axios.interceptors.response.use(async response => {
-    await sleep(1000); //Artifical delay, for development
+    //await sleep(1000); //Artifical delay, for development
     return response;
 
 }, (error: AxiosError) => {
@@ -81,17 +82,6 @@ const requests = {
 }
 
 
-const Brands = {
-
-    search: (params: SearchParams) => requests.post<PaginatedResult<Brand>>(`v1/brands/search`, params), //post 
-    create: (brand: Brand) => requests.post<Result<String>>('v1/brands', brand),
-    details: (id: string) => requests.get<Result<Brand>>(`v1/brands/${id}`),
-    update: (brand: Brand) => requests.put<void>(`v1/brands/${brand.id}`, brand),
-    delete: (id: string) => requests.del<void>(`v1/brands/${id}`), //or Result<string> is ok too
-
-
-}
-
 //Identity
 const Account = {
     current: () => requests.get<Result<User>>('/identity/profile'),
@@ -101,7 +91,7 @@ const Account = {
 
 //user
 const Users = {
-    list: () => requests.get<Result<User[]>>('/users'),
+    list: () => requests.get<Result<User[]>>('/identity/userlist'),
     create: (appUser: RegisterUserFormValues) => requests.post<Result<String>>(`/identity/register`, appUser),
     details: (id: string) => requests.get<Result<User>>(`/identity/profile/${id}`),
     update: (user: User) => requests.put<void>(`/identity/profile/${user.id}`, user), //with id is admin editing a user
@@ -111,15 +101,30 @@ const Users = {
 const Tenants = {
     list: () => requests.get<Result<Tenant[]>>('/tenants'),
     details: (id: string) => requests.get<Result<Tenant>>(`/tenants/${id}`),
-    create: (tenant: Tenant) => requests.post<Result<Tenant>>(`/tenants`, tenant),
+    create: (tenant: CreateTenantRequest) => requests.post<Result<Tenant>>(`/tenants`, tenant),
+
+}
+
+
+
+const Venues = {
+
+    search: (params: SearchParams) => requests.post<PaginatedResult<Venue>>(`/venues/getallvenues`, params), //post 
+
+    create: (venue: Venue) => requests.post<Result<String>>('/venues', venue),
+    details: (id: string) => requests.get<Result<Venue>>(`/venues/${id}`),
+    update: (venue: Venue) => requests.put<void>(`/venues/${venue.id}`, venue),
+    delete: (id: string) => requests.del<void>(`/venues/${id}`), //or Result<string> is ok too
+    
+
 
 }
 
 const agent = {
-    Account,
+    Account, 
     Users,
-    Brands,
-    Tenants
+    Tenants,
+    Venues
 }
 
 export default agent;

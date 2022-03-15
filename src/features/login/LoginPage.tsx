@@ -130,7 +130,7 @@ export default observer(function LoginPage() {
         Email: admin@root.com
       </Box>
       <Box>
-        Pass: 123Pa$$word!
+        Pass: Password123!
       </Box>
     </Container>
   );

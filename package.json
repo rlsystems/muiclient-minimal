@@ -49,6 +49,7 @@
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "history": "^4.10.1",
+    "material-react-toastify": "^1.0.1",
     "mobx": "^6.3.10",
     "mobx-react-lite": "^3.2.3",
     "nprogress": "^0.2.0",

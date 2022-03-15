@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 
-export default function BrandHeader() {
+export default function VenueHeader() {
 
 
 
@@ -11,12 +11,12 @@ export default function BrandHeader() {
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ flexGrow: 1 }}>
                     <Typography variant="h4" gutterBottom>
-                        Brands
+                        Venues
                     </Typography>
                 </Box>
 
                 <Box sx={{ flexShrink: 0 }}>
-                    <Button component={Link} to="/createBrand" variant="contained">New Brand</Button>
+                    <Button component={Link} to="/createVenue" variant="contained">New Venue</Button>
                 </Box>
             </Box>
 

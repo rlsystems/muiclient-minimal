@@ -16,6 +16,8 @@ import LoginPage from '../../features/login/LoginPage';
 
 import LoadingScreen from 'src/components/LoadingScreen';
 import HomePage from 'src/features/home/HomePage';
+import { ToastContainer } from 'material-react-toastify';
+
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +41,7 @@ function App() {
   return (
     <ThemeProvider>
       <ThemeColorPresets>
-
+        <ToastContainer position='bottom-right' hideProgressBar />
         <ProgressBarStyle />
 
         <ScrollToTop />
@@ -59,16 +61,15 @@ function App() {
                 <NavbarVertical />
 
                 <Switch>
-                  <Route exact path='/brands' component={BrandDashboard} />
-                  <Route exact key={location.key} path={['/createBrand', '/editBrand/:id']} component={BrandForm} />
+                  <Route exact path='/venues' component={VenueDashboard} />
+                  <Route exact key={location.key} path={['/createVenue', '/editVenue/:id']} component={VenueForm} />
 
                   <Route exact path='/users' component={UserDashboard} />
                   <Route exact path='/createUser' component={UserRegistration} />
                   <Route exact key={location.key} path={['/editUser', '/editUser/:id']} component={UserProfile} />
 
-                  <Route exact path='/dashboard/one' component={PageOne} />
-                  <Route exact path='/dashboard/two' component={PageTwo} />
-                  <Route exact path='/dashboard/three' component={PageThree} />
+                  <Route exact path='/tenants' component={TenantDashboard} />
+                  <Route exact key={location.key} path={['/createTenant', '/editTenant/:id']} component={TenantForm} />
 
 
                   <Route component={NotFound} />
@@ -77,7 +78,7 @@ function App() {
             )} />
         </Switch>
 
-      </ThemeColorPresets>
+        </ThemeColorPresets>
     </ThemeProvider>
   );
 }
@@ -88,14 +89,17 @@ export default observer(App);
 
 const Loadable = (Component: ElementType) => (props: any) => {
 
-  return (
+  return ( 
     <Suspense fallback={<LoadingScreen isDashboard={true} />}>
       <Component {...props} />
     </Suspense>
   );
 };
-const BrandDashboard = Loadable(lazy(() => import('../../features/brands/dashboard/BrandDashboard')));
-const BrandForm = Loadable(lazy(() => import('../../features/brands/form/BrandForm')));
+const VenueDashboard = Loadable(lazy(() => import('../../features/venues/dashboard/VenueDashboard')));
+const VenueForm = Loadable(lazy(() => import('../../features/venues/form/VenueForm')));
+
+const TenantDashboard = Loadable(lazy(() => import('../../features/tenants/dashboard/TenantDashboard')));
+const TenantForm = Loadable(lazy(() => import('../../features/tenants/form/TenantForm')));
 
 const UserDashboard = Loadable(lazy(() => import('../../features/users/dashboard/UserDashboard')));
 const UserRegistration = Loadable(lazy(() => import('../../features/users/form/UserRegistration')));

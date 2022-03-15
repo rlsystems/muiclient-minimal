@@ -11,12 +11,12 @@ import { useStore } from 'src/app/stores/store';
 // ----------------------------------------------------------------------
 
 type Props = {
-  brandId: string;
+  venueId: string;
 };
 
-export default function RowOptionsMenu({ brandId }: Props) {
+export default function RowOptionsMenu({ venueId }: Props) {
   const [open, setOpen] = useState<HTMLElement | null>(null);
-  const { brandStore } = useStore();
+  const { venueStore } = useStore();
   const handleOpen = (event: React.MouseEvent<HTMLElement>) => {
     setOpen(event.currentTarget);
   };
@@ -50,14 +50,14 @@ export default function RowOptionsMenu({ brandId }: Props) {
           '& .MuiMenuItem-root': { px: 1, typography: 'body2', borderRadius: 0.75 },
         }}
       >
-        <MenuItem onClick={() => brandStore.deleteBrand(brandId)} sx={{ color: 'error.main' }}>
+        <MenuItem onClick={() => venueStore.deleteVenue(venueId)} sx={{ color: 'error.main' }}>
           <Iconify icon={'eva:trash-2-outline'} sx={{ ...ICON }} />
           Delete
         </MenuItem>
 
         <MenuItem
           component={RouterLink}
-          to={`/editBrand/${brandId}`}
+          to={`/editVenue/${venueId}`}
         >
           <Iconify icon={'eva:edit-fill'} sx={{ ...ICON }} />
           Edit

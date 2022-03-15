@@ -31,7 +31,7 @@ import UserListToolbar from './UserListToolbar';
 // ----------------------------------------------------------------------
 
 interface Column {
-    id: 'first' | 'last' | 'email' | 'username' | 'active' | 'guid';
+    id: 'first' | 'last' | 'email' | 'role' | 'active' | 'guid';
     label: string;
     minWidth?: number;
     align?: 'right';
@@ -42,7 +42,7 @@ const columns: readonly Column[] = [
     { id: 'first', label: 'First' },
     { id: 'last', label: 'Last' },
     { id: 'email', label: 'Email' },
-    { id: 'username', label: 'Username' },
+    { id: 'role', label: 'Role' },
     { id: 'active', label: 'Active' },
     { id: 'guid', label: 'GUID' },
 ];
@@ -102,7 +102,7 @@ export default function UserListTable() {
                                         <TableCell>{user.firstName}</TableCell>
                                         <TableCell>{user.lastName}</TableCell>
                                         <TableCell>{user.email}</TableCell>
-                                        <TableCell>{user.userName}</TableCell>
+                                        <TableCell>{user.roleId}</TableCell>
                                         <TableCell>{user.isActive ?
                                             <Chip label="True" variant="outlined" color="success" sx={{width: '4rem'}} /> :
                                             <Chip label="False" variant="outlined" color="error"  sx={{width: '4rem'}}/>}

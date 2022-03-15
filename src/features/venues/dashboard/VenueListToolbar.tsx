@@ -18,19 +18,17 @@ const RootStyle = styled(Toolbar)(({ theme }) => ({
 
 
 
-export default function BrandListToolbar() {
+export default function VenueListToolbar() {
   const theme = useTheme();
   const isLight = theme.palette.mode === 'light';
 
   return (
-    <RootStyle
-      
-    >
+    <RootStyle>
        <InputStyle
           stretchStart={240}
           //value={filterName}
           //onChange={(event: any) => onFilterName(event.target.value)}
-          placeholder="Search brands..."
+          placeholder="Search venues..."
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">

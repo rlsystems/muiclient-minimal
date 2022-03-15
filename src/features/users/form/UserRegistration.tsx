@@ -23,11 +23,11 @@ export default observer(function UserProfile() {
         id: '',
         firstName: '',
         lastName: '',
-        userName: '',
         email: '',
         password: '',
         confirmPassword: '',
         phoneNumber: '',
+        roleId: 'basic'
     });
 
     //gets passed to formik
@@ -89,18 +89,7 @@ export default observer(function UserProfile() {
                             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                             helperText={formik.touched.lastName && formik.errors.lastName}
                         />
-                        <TextField
-                            fullWidth
-                            margin="normal"
-                            id="userName"
-                            name="userName"
-                            label="Username"
-                            value={formik.values.userName}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                            error={formik.touched.userName && Boolean(formik.errors.userName)}
-                            helperText={formik.touched.userName && formik.errors.userName}
-                        />
+               
                         <TextField
                             fullWidth
                             margin="normal"
@@ -151,7 +140,18 @@ export default observer(function UserProfile() {
                             error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
                             helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                         />
-
+                        <TextField
+                            fullWidth
+                            margin="normal"
+                            id="roleId"
+                            name="roleId"
+                            label="Role Id"
+                            value={formik.values.roleId}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                            error={formik.touched.roleId && Boolean(formik.errors.roleId)}
+                            helperText={formik.touched.roleId && formik.errors.roleId}
+                        />
 
                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', mt: 3, mb: 2 }}>
                             <Button component={Link} to='/users' variant="text">Cancel</Button>

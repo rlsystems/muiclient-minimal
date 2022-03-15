@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { SearchParams } from "../models/searchParams";
-import { RegisterTenantFormValues, Tenant } from "../models/tenant";
+import { CreateTenantRequest, Tenant } from "../models/tenant";
 
 
 export default class TenantStore {
@@ -80,18 +80,18 @@ export default class TenantStore {
 
 
     
-    createTenant = async (tenant: Tenant) => {
+    createTenant = async (createTenantRequest: CreateTenantRequest) => {
         this.loading = true;
 
         try {
-            let response = await agent.Tenants.create(tenant);
+            let response = await agent.Tenants.create(createTenantRequest);
             runInAction(() => {
                 //tenant.id = String(response.data.id); //The GUID
+                let newTenant: Tenant = response.data;
+                
+                this.tenantRegistry.set(newTenant.id, newTenant); //add an brand to the Map Object
 
-                tenant = response.data;
-                this.tenantRegistry.set(tenant.id, tenant); //add an brand to the Map Object
-
-                this.selectedTenant = tenant;
+                this.selectedTenant = newTenant;
                 this.editMode = false;
                 this.loading = false;
             })

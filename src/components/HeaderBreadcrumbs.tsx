@@ -4,6 +4,7 @@ import isString from 'lodash/isString';
 import { Box, Typography, Link } from '@mui/material';
 //
 import Breadcrumbs, { Props as BreadcrumbsProps } from './Breadcrumbs';
+import { NavLink as RouterLink } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
@@ -22,13 +23,19 @@ export default function HeaderBreadcrumbs({
   ...other
 }: Props) {
   return (
-    <Box sx={{ mb: 5, ...sx }}>
+    <Box sx={{ mb: 0, px: 3, borderBottom: '1px solid rgba(145, 158, 171, 0.24)', ...sx }}>
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
         <Box sx={{ flexGrow: 1 }}>
+
+
           <Typography variant="h4" gutterBottom>
+            {links.map(link => {
+
+          
+            })}
             {heading}
           </Typography>
-          <Breadcrumbs links={links} {...other} />
+
         </Box>
 
         {action && <Box sx={{ flexShrink: 0 }}>{action}</Box>}

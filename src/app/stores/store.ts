@@ -1,27 +1,28 @@
 import { createContext, useContext } from "react";
+
 import AppUserStore from "./appUserStore";
-import BrandStore from "./brandStore";
 import CommonStore from "./commonStore";
 import ModalStore from "./modalStore";
 import TenantStore from "./tenantStore";
 import UserStore from "./userStore";
+import VenueStore from "./venueStore";
 
 interface Store {
     commonStore: CommonStore;
     userStore: UserStore;
     modalStore: ModalStore;
-    brandStore: BrandStore;
     appUserStore: AppUserStore;
     tenantStore: TenantStore;
+    venueStore: VenueStore
 }
 
 export const store: Store = {
     commonStore: new CommonStore(),
     userStore: new UserStore(),
     modalStore: new ModalStore(),
-    brandStore: new BrandStore(),
     appUserStore: new AppUserStore(),
-    tenantStore: new TenantStore()
+    tenantStore: new TenantStore(),
+    venueStore: new VenueStore()
 }
 
 export const StoreContext = createContext(store); //store context is an object with activityStore inside

@@ -91,9 +91,10 @@ export default class AppUserStore {
                     id: appUser.id,
                     firstName: appUser.firstName,
                     lastName: appUser.lastName,
-                    userName: appUser.userName,
+                    userName: appUser.email, //username same as email
                     email: appUser.email,
                     phoneNumber: appUser.phoneNumber,
+                    roleId: appUser.roleId,
                     isActive: true
                 }
                 

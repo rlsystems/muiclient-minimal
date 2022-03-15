@@ -38,7 +38,7 @@ export default observer(function HomePage() {
 
                 {userStore.isLoggedIn ? (
                     <>
-                        <Button component={Link} to="/brands" variant="contained" >
+                        <Button component={Link} to="/venues" variant="contained" >
                             Go to Dashboard
                         </Button>
                     </>
